@@ -19,6 +19,9 @@ Task description:{task[2]}
 Task duration:{task[3]}
 Task status:{task[4]}
                   """)
+        return data
+            
+            
 
     except Exception as error:
         print(f"Erro in get data task: {error}")
@@ -43,5 +46,27 @@ def create_task(title, descrp, duration):
         conn.commit()
         cur.close()
         conn.close()
+        
+def  update_task(id,title,descrp,duration,status):
+    conn = contion_db()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            UPDATE tasks SET title = %s,description = %s, duration = %s, status = %s
+            WHERE task_id = %s
+            """, (title, descrp, duration,status,id,))
+    except Exception as error:
+        print(f"Error in add date task: {error}")   
+    finally:
+        conn.commit()
+        cur.close()
+        conn.close()   
+        
+          
+   
+        
+    
+  
+
         
 
